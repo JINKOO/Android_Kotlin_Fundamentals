@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">AboutMe</string>
     <string name="name">jinkweon KO</string>
+    <string name="what_is_your_nickname">What is your Nickname?</string>
+    <string name="done">Done</string>
     <string name="yellow_star">YellowStar</string>
     <string name="bio">Hi, my name is JinKweon KO.
         \n\nI love footssal.
