@@ -23,6 +23,7 @@
   - `showSoftInput(view: View, flags: Int)` : 키보드 보임
   - `hideSoftInputFromWindow(windowToken: IBinber, flags: Int)` : 키보드 숨김
   ``` kotlin
+  val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
   // 1. eidtText입력을 위한 키보드 보임
   // 입력 대상의 focus가 존재해야하므로 입력대상에 focus요청
   editText.requestFocus()
