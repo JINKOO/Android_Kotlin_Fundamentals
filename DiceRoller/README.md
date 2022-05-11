@@ -13,9 +13,9 @@
   - Vector drawable은 XML형식으로 된 이미지 이다. 
   - PNG 파일과 같은 Bitmap형식의 이미지 보다 용량이 작고, 유연하다.(어떠한 사이즈까지 scale out이 가능) 
  
-* ### findViewById()
+* ### `findViewById()`
   - 안드로이드 시스템은 프로젝트의 전체 뷰 계층에서 해당 view의 id값을 탐색한다.
-  - findViewById()의 사용은 1번만 해서 각 view의 변수에 할당해서 반복적인 호출을 하지 않도록 한다.
+  - `findViewById()`의 사용은 1번만 해서 각 view의 변수에 할당해서 반복적인 호출을 하지 않도록 한다.
   - 추후, ViewBinding으로 대체.
   
 * ### lateinit keyword
