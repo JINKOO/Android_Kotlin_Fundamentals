@@ -16,9 +16,12 @@
 * ### `findViewById()`
   - 안드로이드 시스템은 프로젝트의 전체 뷰 계층에서 해당 view의 id값을 탐색한다.
   - `findViewById()`의 사용은 1번만 해서 각 view의 변수에 할당해서 반복적인 호출을 하지 않도록 한다.
-  - 추후, ViewBinding으로 대체.
+  - 추후, `DataBinding`으로 대체.
   
 * ### lateinit keyword
+  ```kotlin
+  private lateinit var smapleText: TextView
+  ```
   - Kotlin Compiler에게 해당 변수를 사용하기 전에 초기화 할 것임을 약속.
   - lateinit을 사용하지 않으면, nullalbe로 변수를 선언하고, 사용 할 때에는 매번 null check를 해야한다.
   - lateinit을 사용함으로써, non-nullable 타입으로 사용할 수 있다.
