@@ -38,10 +38,10 @@
   
   
 * ### `DataBinding`
-  - view가 생성 또는 재생성 될때, Android System은 view 계층에서 runtime 때 해당 view를 찾는 `findViewById()`를 매번 호출해 탐색한다.
-    view의 개수가 적을 때에는 어느 정도 `findViewById()`로 성능을 감수 할 수 있지만, 
-    일반 상용 application에는 무수히 많은 view들이 존재한다.
-    가장 좋은 디자인이라도, nested view가 존재 할 수 있다.
+  - view가 생성 또는 재생성 될때, Android System은 view 계층에서 runtime 때 해당 view를 찾는 `findViewById()`를 매번 호출해 탐색한다.  
+    view의 개수가 적을 때에는 어느 정도 `findViewById()`로 성능을 감수 할 수 있지만,  
+    일반 상용 application에는 무수히 많은 view들이 존재한다. 따라서, 성능 저하가 발생하고, 이는 사용 환경에 불편함을 초래    
+    가장 좋은 디자인이라도, nested view가 존재 할 수 있다.  
     
     다음과 같은 layout이 있다고 가정해보자.
     ```html
@@ -62,7 +62,7 @@
     위와 같이 view 계층이 deep하고 복잡하면, 특정 view의 id값을 찾는 `findViewById()`의 탐색 속도는 시간 소요가 걸리고, 이는 app의 속도를 저하시킨다.
     이는 사용자가 App을 사용하는데 있어 좋지 않는 사용 환경을 초래한다.
      
-    해결 방안으로, 우리는 프로퍼티 variable을 사용해서 view에 대한 reference를 cache할 수 있다. 다음과 같이 말이다.
+    해결 방안으로, 우리는 프로퍼티 variable을 사용해서 view에 대한 reference를 cache할 수 있다. 다음과 같이 말이다.  
     (~~Android devleoper 개발자 과정에서 처음에는 `findViewById()`를 지역 변수에 사용했는데...의도가 뭐지..?~~)
     ```kotlin
     class MainActivity : AppCompatActivity {
