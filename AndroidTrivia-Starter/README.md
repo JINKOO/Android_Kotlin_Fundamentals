@@ -3,7 +3,9 @@ AndroidTrivia - starter code
 
 사용 개념
 -------
-### - `Fragment`  
+#.`Fragment`
+-----------
+
 `Fragment`는 `Activity`안에서 user interface(UI)의 한 부분.  
 Single `Activity`에 multiple의 `Fragment`를 조합해 사용 가능.  
 하나의 Fragment를 서로 다른 `Activity`에서 재사용 가능.
@@ -30,12 +32,14 @@ activity의 xml파일에서 `<fragment>`를 사용해 사용하고자 하는 Fra
 ...
 ```
 
-### - Navigation
+#. Navigation
+-------------
 * destination : 사용자가 app내부에서 이동 가능한(도달 할 수 있는) 모든 요소. 예를 들면 `Fragment`
 * navigation graph : app내부의 destination들의 집합
 
 
-### - `NavHostFragment`
+#. `NavHostFragment`
+--------------------
 * navigation graph에서 여러 `Fragment` 중 host 역할을 한다.
 * 보통 `NavHostFragment`라고 named 한다.
 * 사용자가 navigation graph에서 정의되어 있는 destinations(Fragment) 사이에서 이동할 때,  navigation host fragment가 fragment를 교체한다.  또한, `Fragment`는 back stack을 생성하고 관리
@@ -50,7 +54,8 @@ activity의 xml파일에서 `<fragment>`를 사용해 사용하고자 하는 Fra
   app:defaultNavHost="true"/>
 ```
 
-### - action
+#. action
+---------
 - destination간(2개의 `Fragment`간)의 이동 관계를 나타내는 속성
 - action ID값이 생성되고(`action_startFragment_to_destinationFragment`), 이 값을 kotlin코드에서 사용.
 ```kotlin
@@ -59,7 +64,8 @@ playButton.setOnClikceListener { view: View ->
 }
 ```
 
-### - Back Stack and System Back Button
+#. Back Stack and System Back Button
+------------------------------------
 * Android System은 사용자가 app 내에서 새로운 destination으로 이동하면 back stack에 삽입한다.(스택 구조는 뭐 다들 알죠..??)
 * 사용자가 System back button을 선택하면, back stack의 top에 위치한 view가 보여진다.
 * default로 back stack의 top은 가장 최근에 보여진 view이다.
@@ -100,14 +106,15 @@ playButton.setOnClikceListener { view: View ->
 ...
 ```
 
-### - Up Button
+#. Up Button
+------------
 - App bar(action bar)에 존재하는 버튼이다. 
-- app 내부에서 화면들 간의 계층에 따라 화면 전환 한다. app 외부로 사용자가 이동 할 수 없다.
-cf)
+- app 내부에서 화면들 간의 계층에 따라 화면 전환 한다. app 외부로 사용자가 이동 할 수 없다.  cf) Back Button
 - Back Button은 시스템 navigation bar 에서 제공하는 버튼으로, 본 app이 실행 되지 않아도 존재하는 버튼
 - app 내부에서는 back stack에 의해서 화면 전환이 이루어 진다.
 
-### - `NavigationUI`
+#. `NavigationUI`
+-------------------
 - navigation component는 NavigationUI라는 UI 라이브러리를 포함한다.
 - app bar, navigation drawer, bottom navigation을 관리한다.
 - `NavigationUI`class를 사용해서, app bar에 Up Button을 추가할 수 있다.
