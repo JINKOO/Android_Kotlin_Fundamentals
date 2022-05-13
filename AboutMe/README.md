@@ -6,6 +6,7 @@
 * ### padding vs margin
   - padding : View의 boader와 View의 content과의 간격을 의미한다. 
   - margin : View의 boarder와 상위 Layout의 간격을 의미한다.
+  <img width="400" alt="스크린샷 2022-05-13 오후 12 53 27" src="https://user-images.githubusercontent.com/37657541/168207960-e6dfb285-da08-4c1b-beef-4a9b24a617a5.png">
 
 
 * ### ScrollView
