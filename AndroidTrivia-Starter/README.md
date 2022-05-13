@@ -1,5 +1,15 @@
 AndroidTrivia - starter code
 ============================
+실행 화면
+-------
+<p float="left">
+<img width="200" alt="image" src="https://user-images.githubusercontent.com/37657541/168312200-758f42a1-bc67-4a8c-9b61-d2d07d645cc2.png">
+<img width="200" alt="image" src="https://user-images.githubusercontent.com/37657541/168312312-e8a8ac08-eb25-4ebe-ac70-58d070cd3748.png">
+<img width="200" alt="image" src="https://user-images.githubusercontent.com/37657541/168312406-92a5ea89-0ca9-45b2-8125-1f17b23d2fd2.png">
+<img width="200" alt="image" src="https://user-images.githubusercontent.com/37657541/168312483-73a51ed6-4c8d-4a11-950d-596e1a8adc69.png">
+</p>
+
+
 
 사용 개념
 -------
