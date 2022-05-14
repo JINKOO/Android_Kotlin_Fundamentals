@@ -120,7 +120,7 @@ playButton.setOnClikceListener { view: View ->
 ------------
 - App bar(action bar)에 존재하는 버튼이다. 
 - app 내부에서 화면들 간의 계층에 따라 화면 전환 한다. app 외부로 사용자가 이동 할 수 없다.
-  cf) Back Button
+- cf) Back Button
 - Back Button은 시스템 navigation bar 에서 제공하는 버튼으로, 본 app이 실행 되지 않아도 존재하는 버튼
 - app 내부에서는 back stack에 의해서 화면 전환이 이루어 진다.
 
