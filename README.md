@@ -9,4 +9,4 @@
   1. ### [DiceRoller](https://github.com/JINKOO/Android_Kotlin_Fundamentals/tree/main/DiceRoller)
   2. ### [About Me](https://github.com/JINKOO/Android_Kotlin_Fundamentals/tree/main/AboutMe)
   3. ### [ColorMyViews](https://github.com/JINKOO/Android_Kotlin_Fundamentals/tree/main/ColorMyViews)
-  4. ### [Android Trivia](https://github.com/JINKOO/Android_Kotlin_Fundamentals/edit/main/AndroidTrivia-Starter/README.md)
+  4. ### [Android Trivia](https://github.com/JINKOO/Android_Kotlin_Fundamentals/tree/main/AndroidTrivia-Starter)
