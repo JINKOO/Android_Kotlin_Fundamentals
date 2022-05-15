@@ -1,5 +1,15 @@
 AndroidTrivia - starter code
 ============================
+실행 화면
+-------
+<p float="left">
+<img width="200" alt="image" src="https://user-images.githubusercontent.com/37657541/168312200-758f42a1-bc67-4a8c-9b61-d2d07d645cc2.png">
+<img width="200" alt="image" src="https://user-images.githubusercontent.com/37657541/168312312-e8a8ac08-eb25-4ebe-ac70-58d070cd3748.png">
+<img width="200" alt="image" src="https://user-images.githubusercontent.com/37657541/168312406-92a5ea89-0ca9-45b2-8125-1f17b23d2fd2.png">
+<img width="200" alt="image" src="https://user-images.githubusercontent.com/37657541/168312483-73a51ed6-4c8d-4a11-950d-596e1a8adc69.png">
+</p>
+
+
 
 사용 개념
 -------
@@ -81,8 +91,8 @@ playButton.setOnClikceListener { view: View ->
 
 * `popUpTo` : 명시한 destination은 back stack에서 pop하지 않고, 명시한 destination 전까지 destination들은 pop한다. 
 * `popUpToInclusive` 
-- true : back stack의 destination들을 pop하고, 명시한 destination도 back stack에서 pop.
-- false : 명시한 destination은 back stack에서 pop하지 않고, 명시한 destination 전까지 destination들은 pop한다.
+  - true : back stack의 destination들을 pop하고, 명시한 destination도 back stack에서 pop.
+  - false : 명시한 destination은 back stack에서 pop하지 않고, 명시한 destination 전까지 destination들은 pop한다.
 * `popUptoInclusive`속성을 지정하지 않는 경우에는 false값일 때와 동일하게 동작.
 ```html
 ...
@@ -109,7 +119,8 @@ playButton.setOnClikceListener { view: View ->
 #. Up Button
 ------------
 - App bar(action bar)에 존재하는 버튼이다. 
-- app 내부에서 화면들 간의 계층에 따라 화면 전환 한다. app 외부로 사용자가 이동 할 수 없다.  cf) Back Button
+- app 내부에서 화면들 간의 계층에 따라 화면 전환 한다. app 외부로 사용자가 이동 할 수 없다.
+- cf) Back Button
 - Back Button은 시스템 navigation bar 에서 제공하는 버튼으로, 본 app이 실행 되지 않아도 존재하는 버튼
 - app 내부에서는 back stack에 의해서 화면 전환이 이루어 진다.
 
