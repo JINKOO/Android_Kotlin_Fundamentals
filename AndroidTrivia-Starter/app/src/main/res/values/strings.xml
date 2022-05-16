@@ -34,4 +34,7 @@
     <string name="congratulations">Congratulations!</string>
     <string name="share">Share</string>
     <string name="sharing_not_available">Sharing Not Available</string>
+    <string name="rules_label">RULES</string>
+    <string name="about_label">ABOUT</string>
+    <string name="play_label">Play</string>
 </resources>

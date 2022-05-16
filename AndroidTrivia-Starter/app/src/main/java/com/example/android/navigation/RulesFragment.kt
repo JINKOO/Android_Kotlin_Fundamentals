@@ -21,11 +21,41 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import com.example.android.navigation.databinding.FragmentRulesBinding
 
-class RulesFragment : Fragment() {
+class RulesFragment : Fragment(), View.OnClickListener {
+
+    private lateinit var binding: FragmentRulesBinding
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_rules, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_rules, container, false)
+
+        initListener()
+
+        return binding.root
+    }
+
+    private fun initListener() {
+        binding.apply {
+            playButton.setOnClickListener(this@RulesFragment)
+        }
+    }
+
+    private fun moveToGameFragment(view: View) {
+        view.findNavController().navigate(R.id.action_rulesFragment_to_gameFragment)
+    }
+
+    override fun onClick(view: View?) {
+        binding.apply {
+            when(view) {
+                playButton -> {
+                    moveToGameFragment(view)
+                }
+            }
+        }
     }
 }
