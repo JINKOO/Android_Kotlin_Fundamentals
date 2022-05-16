@@ -182,8 +182,8 @@ playButton.setOnClikceListener { view: View ->
 - drawer 버튼은 app bar에 존재하며, 사용자가 start destination 있을 때 화면에 나타난다.
 - Material Components for Android, `Material` 라이브러리의 한 종류이다. (dependency를 추가해야 한다.)
 
-- drawer menu 생성 및 menu item을 추가한다.
-- navigation graph에서 drawer에서 선택한 menu item 따라 이동할 destination을 추가(menu item의 ID값과 동일하면 좋다)
+- res에서 drawer menu xml을 생성하고, 해당 menu.xml에서 menu item을 추가한다.
+- navigation graph에서 사용자가 drawer에서 선택한 menu item 따라 이동할 destination(`Fragment`)을 추가(menu item의 ID값과 동일하면 좋다)
 - `activity_main.xml`에 `DrawerLayout`추가
   ```html
   <layout xmlns:android="http://schemas.android.com/apk/res/android"
