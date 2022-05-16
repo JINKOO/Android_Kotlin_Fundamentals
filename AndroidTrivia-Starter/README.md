@@ -130,4 +130,102 @@ playButton.setOnClikceListener { view: View ->
 - app bar, navigation drawer, bottom navigation을 관리한다.
 - `NavigationUI`class를 사용해서, app bar에 Up Button을 추가할 수 있다.
 - startDestination을 제외한 모든 destination에 Up Button이 App bar에 추가 된다.
+- navigation controller를 사용해서 app에 사용해 Up Button을 추가한다.
+  ```kotlin
+  // MainActivity
+  override fun onCreate(savedInstanceState: Bundle?) {
+    // 1. navigation controller를 찾는다.
+    val navController = this.findNavController(R.id.myNavHostFragment)
+  
+    // 2. app bar와 nav controller를 연결
+    NavigationUI.setupActionBarWithNavController(this, navController)
+  }
+  
+  // 3. 해당 함수 override
+  override fun onSupportNavigateUp(): Boolean {
+    val navController = this.findNavController(R.id.myNavHostFragment)
+    return navController.navigateUp()
+  }
+  ```
+- 해당 코드를 실행하면, Up Button은 startDestination 여기서는(`TitleFragment`)를 제외하고 모든 destination의 App bar에 나타난다.
+- 어떤 화면에서든지, Up Button을 클릭하면, start destination으로 돌아온다. 여기서는 `TitleFragment`로 돌아온다.
 
+
+#. Options Menu
+---------------
+- app bar에 나타나는 3개의 점이 vertical하게 디자인 되어있는 메뉴 버튼.
+- 사용자는 해당 이 부분을 tap하여, 특정 menu화면(destination)으로 이동할 수 있다. 여기서는 `AboutFragment`
+- menu폴더에서 `options_menu.xml` 형식의 xml파일을 생성 
+- menu Item을 추가할 때, ID값을 navigation graph에서 이동하고자 하는 `Fragment`의 ID와 동일하게 한다. (`onClick` handler를 구현하지 않아도 된다.)
+- `Activity`의 `onCreate()` 또는 `Fragment`의 `onCreatView()`에서 `setHasOptionsMenu(true)`의 코드를 추가
+- `onCreateOptionsMenu()`, `onOptionsItemSelected()`를 override한다.
+  ```kotlin
+  override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+    super.onCreateOptionsMenu(menu, inflater)
+    // 우리가 생성한 menu xml파일
+    inflater.inflate(R.menu.options_menu, menu)
+  }
+  
+  // options menu에서 사용자가 선택한 menu에 따라 적절한 action을 한다.
+  // navigation graph에서 option menu를 선택했을 때 이동하는 destination의 ID와, menu Item의 ID가 같기 때문에, onClick listener 구현하지 않음.
+  override fun onOptionsItemSelected(item: MenuItem): Booelan {
+    return NavigationUI.onNavDestinationSelected(item, requireView().findNavController()) 
+                        || super.onOptionsItemSelected(item)
+  }
+  ```
+
+#. navigation drawer
+--------------------
+- 화면 edge에서 slide되어 나오는 panel.
+- drawer는 header와 menu로 구성
+- 사용자가 화면을 left --> right로 쓸거나, `nav drawer button` 또는 `hamburger` icon을 선택해 drawer를 실행한다.
+- drawer 버튼은 app bar에 존재하며, 사용자가 start destination 있을 때 화면에 나타난다.
+- Material Components for Android, `Material` 라이브러리의 한 종류이다. (dependency를 추가해야 한다.)
+
+- drawer menu 생성 및 menu item을 추가한다.
+- navigation graph에서 drawer에서 선택한 menu item 따라 이동할 destination을 추가(menu item의 ID값과 동일하면 좋다)
+- `activity_main.xml`에 `DrawerLayout`추가
+  ```html
+  <layout xmlns:android="http://schemas.android.com/apk/res/android"
+   xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.drawerlayout.widget.DrawerLayout
+       android:id="@+id/drawerLayout"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+
+    <LinearLayout
+       . . . 
+    </LinearLayout>
+      
+    <com.google.android.material.navigation.NavigationView
+      android:id="@+id/navView"
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:layout_gravity="start"
+      app:headerLayout="@layout/nav_header"
+      app:menu="@menu/navdrawer_menu" />  
+    </androidx.drawerlayout.widget.DrawerLayout>
+  </layout>
+  ```
+  
+ - `MainActivity`에서 drawerLayout과 navigation conroller를 연결해야한다.(Up Button처럼) 그래야, 사용자가 navigation drawer에서 menu item을 선택 했을 때,  
+   해당 destination으로 이동하기 때문
+   ```kotlin
+   override fun onCreate(savedInstanceState: Bundle?) {
+    ...
+    val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+    
+    // navigation drawer와 nav controller를 연결한다.   
+    NavigationUI.setUpWithNavController(binding.navView, navController)
+    
+    // 햄버거 버튼과, Up Button을 사용할 수 있도록 한다.
+    NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout)
+   }
+   
+   // 
+   override fun onSupportNavigateUp(): Boolean {
+    val navController = this.findNavController(R.id.myNavHostFragment)
+    return NavigationUI.navigateUp(navController, drawerLayout)
+   }
+   ```
+  
