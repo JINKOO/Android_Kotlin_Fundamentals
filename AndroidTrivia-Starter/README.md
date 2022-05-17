@@ -228,4 +228,68 @@ playButton.setOnClikceListener { view: View ->
     return NavigationUI.navigateUp(navController, drawerLayout)
    }
    ```
+
+#. Safe Args
+------------
+- Gradle plugin으로, Fragement간 argument를 전달 할 때 사용하며, 이 transaction이 수행할 때 type-safe를 통해 발생하는 bug를 예방한다.  
+  compile-time때, error를 탐지 할 수 있도록 어느 특정 code와 class 파일들을 생성한다.
+- plugin이 생성한 `NavDirection`class를 사용해서 fragment간 argument를 전달한다.
+- 왜 사용하는 가??
+  App 내부에서 하나의 `Fragment`가 다른 `Fragment`로 data를 전달 해야하는 경우가 있다.  
+  기존에 우리가 사용하던 한 가지 방법은 key-value쌍의 `Bundle` Class의 instance를 사용하는 것이다.  
+  
+  예를 들어, A Fragment --> B Fragment로 `Bundle` instance를 전달해야 할때,  
+  Fragment A는 bundle을 생성하고, key-value쌍으로 data를 저장 한 후, 이 `Bundle`을 Fragment B로 전달한다.
+  Fragment B에서는 key값으로, `Bundle`에서 key-value를 가져온다.  
+  
+  Bundle을 사용하는 경우에는, compile-time때 문제가 발생하지 않지만, run time때 다음 2가지의 error가 발생 할 수 있다.
+  
+  * Type mismatch error : Fragment A --> Fragment B로 String을 보냈지만, Fragment B는 `Bundle`에 Integer를 요청해 default값인 0을 가지게 된다면,  
+    0은 유효한 값이므로, compile-time때 어떠한 error가 발생했는지 모른다. run time때, 올바르지 않게 동작하거나, app이 죽을 수 있다.
+   
+  * Missing Key Error : Fragment B가 `Bundle`에 존재하지 않는 argument를 요청하면, `null`을 리턴한다. 이 경우 역시 compile time때는 catch할 수 없다.  
+    하지만, null로 인해, run time때 사용자에게 심각한 문제를 초래할 수 있다.
+  
+  위의 2가지 경우를 보면, 모두 run time때 error가 발생한다.  
+  Safe Args를 사용해서 이를 compile time때 error를 잡을 수 있다.
+ 
+- `NavDirection` class들이 생성되는데, 각 fragment마다 생성된다. `TitleFragment`는 `TitleFragmentDirection` class가 생성된다.
+- safe args를 사용하려면 기존의 action ID값으로, `Navcontroller.navigate()`를 사용했지만, `NavDirection` Class를 사용해야 한다.
+  ```kotlin
+  view.findNavController().navigate(GameFragmentDirection.actionGameFragmentToGameWonFragment(numQuestions, numCorrect))
+  ```
+  
+- `GameFragment` -> `GameWonFragment`로의 argument전달이 필요한 경우, `GameWonFragment`에 Argument를 추가한다.
+  ```html
+  <fragment
+        android:id="@+id/gameWonFragment"
+        android:name="com.example.android.navigation.GameWonFragment"
+        android:label="fragment_game_won"
+        tools:layout="@layout/fragment_game_won" >
+        <action
+            android:id="@+id/action_gameWonFragment_to_gameFragment"
+            app:destination="@id/gameFragment"
+            app:popUpTo="@id/titleFragment" />
+        <argument
+            android:name="numQuestions"
+            app:argType="integer" />
+        <argument
+            android:name="numCorrect"
+            app:argType="integer" />
+  </fragment>
+  ```
+  
+- 'GameWonFragment'에서의 onCreateView()에서 다음과 같이 사용한다.
+  ```kotlin
+  val GameWonFragmentArgs.fromBundle(requireArguments())
+  Log.d(TAG, "args :: ${args.numQuestions}, ${args.numCorrect}"
+  ```
+
+#. Implicit Intent
+------------------
+- Android는 다른 app의 Activity로 이동 가능한데, 이를 가능하게 해주는 것이 `Intent`이다.
+- `Intent`는 Android의 컴포넌트 간 통신을 할 때 사용하는 간단한 messaging object.
+- explicit intent를 사용해서 특정 Activity로 이동할 수 있다.
+- implicit intent의 경우에는 Android System이 누가 해당 intent를 처리할 지 모르기 때문에, 해당 intent를 실행할 수 있는, device에 존재하는 app들을 사용자가 선택하게 한다.  
+  예를 들면, 공유하기 기능 (`Intent.ACTION_SEND`)일 때, device의 공유가 가능한 모든 app들이 대화상자에 표시되고(카톡, 메일) 사용자가 선택 할 수 있다. 
   
