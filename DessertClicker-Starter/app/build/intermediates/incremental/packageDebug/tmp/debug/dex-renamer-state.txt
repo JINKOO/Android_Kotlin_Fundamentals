@@ -1,0 +1,4 @@
+#Wed May 18 23:06:12 KST 2022
+base.0=/Users/kojinkweon/Desktop/Code/Android/android-kotlin-fundamentals-starter-apps-master/DessertClicker-Starter/app/build/intermediates/dex/debug/mergeDexDebug/classes.dex
+renamed.0=classes.dex
+path.0=classes.dex
