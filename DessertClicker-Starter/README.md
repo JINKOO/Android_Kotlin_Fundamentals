@@ -49,5 +49,5 @@ foucs만 잃은 상태에서는 `onPasue()` -> `onResume()`이 된다.(`onStop()
 - `onDettach()` : host `Activity`와 fragment가 연결이 해제 될 때 실행 된다.
 
 
-![참고 : The Android Lifecycle cheat sheet](https://medium.com/@JoseAlcerreca/the-android-lifecycle-cheat-sheet-part-i-single-activities-e49fd3d202ab)
+[참고 : The Android Lifecycle cheat sheet](https://medium.com/@JoseAlcerreca/the-android-lifecycle-cheat-sheet-part-i-single-activities-e49fd3d202ab)
 
