@@ -1,4 +1,6 @@
 package com.kjk.guesstheword.score
 
-class ScoreFragment {
+import androidx.fragment.app.Fragment
+
+class ScoreFragment : Fragment() {
 }

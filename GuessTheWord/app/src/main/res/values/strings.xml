@@ -3,4 +3,8 @@
     <string name="get_ready_to_label">get Ready To</string>
     <string name="game_title_label">Guess The World</string>
     <string name="play_button_label">PLAY</string>
+    <string name="set_word_label">the word is...</string>
+    <string name="skip">skip</string>
+    <string name="got_it">got it</string>
+    <string name="end_game">END GAME</string>
 </resources>
