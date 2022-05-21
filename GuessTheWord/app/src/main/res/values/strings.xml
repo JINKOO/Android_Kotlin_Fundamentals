@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">GuessTheWord</string>
+    <string name="get_ready_to_label">get Ready To</string>
+    <string name="game_title_label">Guess The World</string>
+    <string name="play_button_label">PLAY</string>
+</resources>
