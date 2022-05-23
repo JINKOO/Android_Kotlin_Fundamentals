@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.kjk.guesstheword.R
 import com.kjk.guesstheword.databinding.FragmentGameBinding
+import kotlin.properties.Delegates
 
 class GameFragment : Fragment() {
 
@@ -20,7 +21,7 @@ class GameFragment : Fragment() {
     private lateinit var currentWord: String
 
     // 현재 점수
-    private lateinit var currentScore: String
+    private var currentScore: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -86,7 +87,7 @@ class GameFragment : Fragment() {
     }
 
     private fun updateScore() {
-
+        binding.scoreText.text = currentScore.toString()
     }
 
     private fun updateWord() {
