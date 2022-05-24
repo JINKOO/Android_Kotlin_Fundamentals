@@ -10,7 +10,8 @@ import com.kjk.guesstheword.R
 import com.kjk.guesstheword.databinding.FragmentGameBinding
 import kotlin.properties.Delegates
 
-class GameFragment : Fragment() {
+class GameFragment :
+    Fragment(), View.OnClickListener {
 
     private lateinit var binding: FragmentGameBinding
 
@@ -46,7 +47,8 @@ class GameFragment : Fragment() {
 
     private fun setListener() {
         binding.apply {
-
+            skipButton.setOnClickListener(this@GameFragment)
+            correctButton.setOnClickListener(this@GameFragment)
         }
     }
 
@@ -78,6 +80,16 @@ class GameFragment : Fragment() {
         wordList.shuffle()
     }
 
+    private fun onCorrect() {
+        currentScore++
+        nextWord()
+    }
+
+    private fun onSkip() {
+        currentScore--
+        nextWord()
+    }
+
     private fun nextWord() {
         if (wordList.isNotEmpty()) {
             currentWord = wordList.removeAt(0)
@@ -86,11 +98,29 @@ class GameFragment : Fragment() {
         updateScore()
     }
 
+    /** ui data update */
+
     private fun updateScore() {
         binding.scoreText.text = currentScore.toString()
     }
 
     private fun updateWord() {
         binding.wordTextview.text = currentWord
+    }
+
+    override fun onClick(v: View?) {
+        binding.run {
+            when (v) {
+                skipButton -> {
+                    onSkip()
+                }
+                correctButton -> {
+                    onCorrect()
+                }
+                else -> {
+
+                }
+            }
+        }
     }
 }
