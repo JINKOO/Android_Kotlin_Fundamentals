@@ -281,7 +281,7 @@ playButton.setOnClikceListener { view: View ->
   
 - 'GameWonFragment'에서의 onCreateView()에서 다음과 같이 사용한다.
   ```kotlin
-  val GameWonFragmentArgs.fromBundle(requireArguments())
+  val args = GameWonFragmentArgs.fromBundle(requireArguments())
   Log.d(TAG, "args :: ${args.numQuestions}, ${args.numCorrect}"
   ```
 
