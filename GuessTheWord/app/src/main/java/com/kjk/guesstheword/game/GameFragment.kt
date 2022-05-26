@@ -1,28 +1,29 @@
 package com.kjk.guesstheword.game
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.kjk.guesstheword.R
 import com.kjk.guesstheword.databinding.FragmentGameBinding
 import kotlin.properties.Delegates
 
-class GameFragment :
-    Fragment(), View.OnClickListener {
+class GameFragment : Fragment(), View.OnClickListener {
 
     private lateinit var binding: FragmentGameBinding
 
-    // 단어들이 들어 있는 리스트
-    private lateinit var wordList: MutableList<String>
-
-    // 현재 단어
-    private lateinit var currentWord: String
-
-    // 현재 점수
-    private var currentScore: Int = 0
+    // viewModel
+    // viewModel의 instance를 생성할 때에는 ViewModel을 사용하지 않고,
+    // ViewModelProvider를 사용한다.
+    private lateinit var viewModel: GameViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,91 +37,85 @@ class GameFragment :
             false
         )
 
+        // init viewModel
+        Log.i(TAG, "onCreateView: called viewModelProvider.get()")
+        viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
+
         setListener()
-        resetList()
-        nextWord()
-        updateWord()
-        updateScore()
+
+        viewModel.currentScore.observe(viewLifecycleOwner, Observer { newScore ->
+            Log.i(TAG, "onCreateView: newScore:  ${newScore}")
+            updateScore(newScore)
+        })
+
+        viewModel.currentWord.observe(viewLifecycleOwner, Observer { newWord ->
+            Log.i(TAG, "onCreateView: newWord: ${newWord}")
+            updateWord(newWord)
+        })
+
+        viewModel.eventGameFinish.observe(viewLifecycleOwner, Observer { hasFinished ->
+            Log.i(TAG, "onCreateView: hasFinished: ${hasFinished}")
+            if (hasFinished) {
+                onEndGame()
+            }
+        })
 
         return binding.root
+
     }
 
     private fun setListener() {
         binding.apply {
             skipButton.setOnClickListener(this@GameFragment)
             correctButton.setOnClickListener(this@GameFragment)
+            endGameButton.setOnClickListener(this@GameFragment)
         }
     }
 
-    /** random하게 set한다. */
-    private fun resetList() {
-        wordList = mutableListOf(
-            "queen",
-            "hospital",
-            "basketball",
-            "cat",
-            "change",
-            "snail",
-            "soup",
-            "calendar",
-            "sad",
-            "desk",
-            "guitar",
-            "home",
-            "railway",
-            "zebra",
-            "jelly",
-            "car",
-            "crow",
-            "trade",
-            "bag",
-            "roll",
-            "bubble"
-        )
-        wordList.shuffle()
-    }
-
+    /** GameFragment에서 버튼을 클릭했을 때 이벤트 처리 */
     private fun onCorrect() {
-        currentScore++
-        nextWord()
+        viewModel.onCorrect()
     }
 
     private fun onSkip() {
-        currentScore--
-        nextWord()
+        viewModel.onSkip()
     }
 
-    private fun nextWord() {
-        if (wordList.isNotEmpty()) {
-            currentWord = wordList.removeAt(0)
-        }
-        updateWord()
-        updateScore()
+    /** ui data update with viewModel's data */
+    private fun updateScore(score: Int) {
+        binding.scoreText.text = score.toString()
     }
 
-    /** ui data update */
-
-    private fun updateScore() {
-        binding.scoreText.text = currentScore.toString()
+    private fun updateWord(word: String) {
+        binding.wordTextview.text = word
     }
 
-    private fun updateWord() {
-        binding.wordTextview.text = currentWord
+
+    private fun onEndGame() {
+        // End Game
+        gameFinished()
+    }
+
+    /** 사용자가 end game을 tab하면, score fragment로 이동 */
+    private fun gameFinished() {
+        Toast.makeText(context, "Game Finished", Toast.LENGTH_SHORT).show()
+        val action = GameFragmentDirections.actionGameFragmentToScoreFragment(viewModel.currentScore.value ?: 0)
+        NavHostFragment.findNavController(this).navigate(action)
+        viewModel.onGameFinishComplete()
     }
 
     override fun onClick(v: View?) {
         binding.run {
             when (v) {
-                skipButton -> {
-                    onSkip()
-                }
-                correctButton -> {
-                    onCorrect()
-                }
-                else -> {
-
-                }
+                skipButton -> { onSkip() }
+                correctButton -> { onCorrect() }
+                endGameButton -> { onEndGame() }
+                else -> {}
             }
         }
+    }
+
+    companion object {
+        private const val TAG = "GameFragment"
     }
 }
