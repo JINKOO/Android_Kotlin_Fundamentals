@@ -41,8 +41,15 @@ class GameFragment : Fragment(), View.OnClickListener {
         Log.i(TAG, "onCreateView: called viewModelProvider.get()")
         viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
 
-        setListener()
+        // view layout파일에서 direct로 viewModel의 UI data를 사용하기 위해서
+        binding.gameViewModel = viewModel
 
+        /** dataBinding으로 listener binding를 사용해서 필요없음 */
+        //setListener()
+
+        binding.lifecycleOwner = viewLifecycleOwner
+
+        /**
         viewModel.currentScore.observe(viewLifecycleOwner, Observer { newScore ->
             Log.i(TAG, "onCreateView: newScore:  ${newScore}")
             updateScore(newScore)
@@ -52,16 +59,17 @@ class GameFragment : Fragment(), View.OnClickListener {
             Log.i(TAG, "onCreateView: newWord: ${newWord}")
             updateWord(newWord)
         })
+        */
 
         viewModel.eventGameFinish.observe(viewLifecycleOwner, Observer { hasFinished ->
             Log.i(TAG, "onCreateView: hasFinished: ${hasFinished}")
+            // viewModel의 hasFinish값이 true인 경우에만 종료한다.
             if (hasFinished) {
                 onEndGame()
             }
         })
 
         return binding.root
-
     }
 
     private fun setListener() {

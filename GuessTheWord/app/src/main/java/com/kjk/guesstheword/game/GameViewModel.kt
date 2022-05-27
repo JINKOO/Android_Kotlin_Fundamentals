@@ -25,7 +25,7 @@ class GameViewModel : ViewModel() {
         get() = _eventGameFinish
 
     init {
-        Log.i(TAG, ": GameViewModel Created()")
+        Log.i(TAG, "init{}: GameViewModel Created() ${eventGameFinish.value}")
         _currentWord.value = ""
         _currentScore.value = 0
         resetList()
@@ -85,7 +85,6 @@ class GameViewModel : ViewModel() {
     fun onGameFinishComplete() {
         _eventGameFinish.value = false
     }
-
 
     override fun onCleared() {
         super.onCleared()
