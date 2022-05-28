@@ -40,6 +40,19 @@
             tools:text="guitar" />
 
         <TextView
+            android:id="@+id/word_hint_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{gameViewModel.wordHintString}"
+            android:gravity="center"
+            android:textSize="32sp"
+            app:layout_constraintTop_toBottomOf="@+id/word_textview"
+            app:layout_constraintBottom_toTopOf="@+id/timer_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Current Word has 6 letters\nThe letter at position 4 is T"/>
+
+        <TextView
             android:id="@+id/timer_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -47,6 +60,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:fontFamily="sans-serif"
+            android:text="@{gameViewModel.currentTimerString}"
             android:textColor="@color/black"
             android:textSize="14sp"
             android:textStyle="normal"
