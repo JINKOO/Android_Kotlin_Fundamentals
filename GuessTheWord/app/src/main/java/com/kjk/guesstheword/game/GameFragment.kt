@@ -100,7 +100,6 @@ class GameFragment : Fragment(), View.OnClickListener {
 
 
     private fun onEndGame() {
-        // End Game
         gameFinished()
     }
 
@@ -118,7 +117,6 @@ class GameFragment : Fragment(), View.OnClickListener {
                 skipButton -> { onSkip() }
                 correctButton -> { onCorrect() }
                 endGameButton -> { onEndGame() }
-                else -> {}
             }
         }
     }
