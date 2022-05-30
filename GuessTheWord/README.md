@@ -153,6 +153,7 @@ viewModel.score.observe(viewLifecycleOwner, Observer { newScore ->
 ```
 
 #. `LiveData` vs `MutableLiveData`
+---------------------------------
 - app내에서 `viewModel` data를 변경 할 수 있다.
 - UI Controller는 data를 viewModel로 부터 read해야 한다. 따라서, `viewModel`의 data field는 private이 될 수 없다.  
   이를 해결하면서, data를 `encapsulation`을 하기 위해서는 `MutableLiveData`와 `LiveData`를 사용해야 한다. 그리고 Kotlin의 backing property..
