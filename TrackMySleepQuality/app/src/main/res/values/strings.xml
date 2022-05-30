@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">TrackMySleepQuality</string>
+    <string name="start">START</string>
+    <string name="stop">stop</string>
+    <string name="show_sleep_data_label">HERE IS YOUR SLEEP DATA</string>
+    <string name="clear">clear</string>
+    <string name="how_was_your_sleep">How was your sleep?</string>
+</resources>
