@@ -17,9 +17,7 @@ abstract class SleepDatabase : RoomDatabase() {
 
         fun getInstance(context: Context): SleepDatabase {
             synchronized(this) {
-
                 var instance = INSTANCE
-
                 if (instance == null) {
                     instance = Room.databaseBuilder(
                         context,
@@ -30,9 +28,7 @@ abstract class SleepDatabase : RoomDatabase() {
                         .build()
                     INSTANCE = instance
                 }
-
                 return instance
-
             }
         }
     }
