@@ -135,8 +135,8 @@ class ScoreViewModel : ViewModel() {
   
   init {
     // 초기화..
-    score = 0
-    word = ""
+    score.value = 0
+    word.value = ""
   }
 }
 ```
