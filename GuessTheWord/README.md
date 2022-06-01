@@ -14,6 +14,7 @@
 -------------------
 - App내의 각 classes들과 각 관계들을 디자인 하는 방법을 의미한다. (코드가 어떻게 구성될 것인지, 특정 시나리오에서 실행이 잘되는지, 유지보수가 용이)
 - AAC(Android Architecture Component)는 MVVM패턴과 유사하다.
+- AAC의 ViewModel과 MVVM의 ViewModel은 다른 것임!!!
 
 #. 관심사 분리
 ------------
