@@ -14,6 +14,7 @@
 -------------------
 - App내의 각 classes들과 각 관계들을 디자인 하는 방법을 의미한다. (코드가 어떻게 구성될 것인지, 특정 시나리오에서 실행이 잘되는지, 유지보수가 용이)
 - AAC(Android Architecture Component)는 MVVM패턴과 유사하다.
+- AAC의 ViewModel과 MVVM의 ViewModel은 다른 것임!!!
 
 #. 관심사 분리
 ------------
@@ -119,7 +120,7 @@ viewModel = ViewModelProvider(this, viewModelFactory).get(ScoreViewModel::class.
 -  예를 들어, score를 `LiveData`를 사용해 wrap할 수 있다.
 
 - `LiveData`는 관찰가능(observerable)하다.  
-   이 의미는 `LiveData`가 wrap한(hold한) data가 변경 되었을 때, 관찰하고 있는 대상 'observer'가 변경 사항을 알린다.
+   이 의미는 `LiveData`가 wrap한(hold한) data가 변경 되었을 때, 관찰하고 있는 대상 'observer'에게 변경 사항을 알린다.
 - `LiveData`는 data를 hold한다. 어떠한 타입의 data도 wrap할 수 있다.
 - `LiveData`는 생명 주기를 인식한다. LiveData에 observer를 등록 하면, observer는 `LifeCycleOwner`(일반적으로 `Activity` 혹은 `Fragment`)에 관련된다.
 - `LiveData`는 생명 주기에서 active 상태인 `ACTIVE`, `RESUME`상태인 경우 또는 observer들이 'inactive -> active'의 상태 변화가 있을 때, observer들을 update한다.
@@ -134,8 +135,8 @@ class ScoreViewModel : ViewModel() {
   
   init {
     // 초기화..
-    score = 0
-    word = ""
+    score.value = 0
+    word.value = ""
   }
 }
 ```
