@@ -13,7 +13,7 @@ class SleepTrackerViewModel(
     application: Application
 ) : AndroidViewModel(application) {
 
-    // 가장 최근의 night
+    // 현재 기록 할 sleepNight
     private var toNight = MutableLiveData<SleepNight?>()
 
     // room이 background에서 실행 한다. suspend로 실행하지 않아도 된다.
@@ -24,10 +24,30 @@ class SleepTrackerViewModel(
         formatNights(allNights, application.resources)
     }
 
-    // SleepQualityFragment로 이동 유무
-    private val _navigateToSleepQuality = MutableLiveData<SleepNight>()
-    val navigateToSleepQuality: LiveData<SleepNight>
+    // SleepQualityFragment로 navigate trigger
+    private val _navigateToSleepQuality = MutableLiveData<SleepNight?>()
+    val navigateToSleepQuality: LiveData<SleepNight?>
         get() = _navigateToSleepQuality
+
+    /** 현재 기록할 sleepNight가 null이어야 startButton을 enable한다. */
+    val startButtonEnable = Transformations.map(toNight) {
+        it == null
+    }
+
+    /** 현재 기록 중인 sleepNight가 있다면, stopButton은 enable*/
+    val stopButtonEnable = Transformations.map(toNight) {
+        it != null
+    }
+
+    /** clear는 data가 있는 경우에만, clearButtonEnable한다. */
+    val clearButtonEnable = Transformations.map(allNights) {
+        it?.isNotEmpty()
+    }
+
+    /** SnackBar Message 출력 event trigger */
+    private val _onSnackBarEvent = MutableLiveData<Boolean>()
+    val onSnackBarEvent: LiveData<Boolean>
+        get() = _onSnackBarEvent
 
     init {
         initToNight()
@@ -42,6 +62,7 @@ class SleepTrackerViewModel(
     private suspend fun getToNightFromDatabase(): SleepNight? {
         val night = dataBase.getToNight()
         if (night?.endTimeMillis != night?.startTimeMillis) {
+            Log.d(TAG, "getToNightFromDatabase: ${night?.nightId}")
             return null
         }
         Log.d(TAG, "getToNightFromDatabase: ${night?.startTimeMillis}")
@@ -70,6 +91,7 @@ class SleepTrackerViewModel(
             Log.d(TAG, "onStopTracker: ${toNight.value?.startTimeMillis} ")
             oldNight.endTimeMillis = System.currentTimeMillis()
             update(oldNight)
+            _navigateToSleepQuality.value = oldNight
         }
     }
 
@@ -82,11 +104,20 @@ class SleepTrackerViewModel(
         viewModelScope.launch {
             clear()
             toNight.value = null
+            _onSnackBarEvent.value = true
         }
     }
 
     private suspend fun clear() {
         dataBase.clear()
+    }
+
+    fun onNavigateDone() {
+        _navigateToSleepQuality.value = null
+    }
+
+    fun onSnackBarEventDone() {
+        _onSnackBarEvent.value = false
     }
 
     companion object {

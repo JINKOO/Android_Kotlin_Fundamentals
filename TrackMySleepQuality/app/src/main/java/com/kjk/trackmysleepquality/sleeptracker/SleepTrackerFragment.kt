@@ -6,18 +6,23 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.kjk.trackmysleepquality.R
 import com.kjk.trackmysleepquality.database.SleepDatabase
+import com.kjk.trackmysleepquality.database.SleepNight
 import com.kjk.trackmysleepquality.databinding.FragmentSleepTrackerBinding
+import com.kjk.trackmysleepquality.sleepquality.SleepQualityFragment
 
 class SleepTrackerFragment : Fragment() {
 
     private lateinit var binding: FragmentSleepTrackerBinding
 
     private lateinit var viewModel: SleepTrackerViewModel
-    private lateinit var viewModelFactory: SleepTrackerViewModelFactory
 
+    private lateinit var viewModelFactory: SleepTrackerViewModelFactory
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,10 +44,41 @@ class SleepTrackerFragment : Fragment() {
         viewModelFactory = SleepTrackerViewModelFactory(dataSource, application)
         viewModel = ViewModelProvider(this, viewModelFactory).get(SleepTrackerViewModel::class.java)
 
-
         binding.lifecycleOwner = this
         binding.sleepTrackerViewModel = viewModel
 
+        // observe
+        observe()
+
         return binding.root
+    }
+
+    private fun observe() {
+        viewModel.navigateToSleepQuality.observe(viewLifecycleOwner, Observer { night ->
+            night?.let {
+                moveToSleepQuality(night)
+                viewModel.onNavigateDone()
+            }
+        })
+
+        viewModel.onSnackBarEvent.observe(viewLifecycleOwner, Observer { toShowMessage ->
+            if (toShowMessage) {
+                showSnackBarMessage()
+                viewModel.onSnackBarEventDone()
+            }
+        })
+    }
+
+    private fun moveToSleepQuality(night: SleepNight) {
+        this.findNavController()
+            .navigate(SleepTrackerFragmentDirections.actionSleepTrackerFragmentToSleepQualityFragment(night.nightId))
+    }
+
+    private fun showSnackBarMessage() {
+        Snackbar.make(
+            requireActivity().findViewById(android.R.id.content),
+            getString(R.string.cleared_message),
+            Snackbar.LENGTH_SHORT
+        ).show()
     }
 }
