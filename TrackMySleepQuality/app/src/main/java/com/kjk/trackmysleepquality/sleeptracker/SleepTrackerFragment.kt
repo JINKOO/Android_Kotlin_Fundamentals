@@ -1,6 +1,7 @@
 package com.kjk.trackmysleepquality.sleeptracker
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +24,11 @@ class SleepTrackerFragment : Fragment() {
     private lateinit var viewModel: SleepTrackerViewModel
 
     private lateinit var viewModelFactory: SleepTrackerViewModelFactory
+
+    //
+    private val sleepNightAdapter by lazy {
+        SleepNightAdapter()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,6 +53,11 @@ class SleepTrackerFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.sleepTrackerViewModel = viewModel
 
+        // recyclerView
+        binding.recyclerView.apply {
+            adapter = sleepNightAdapter
+        }
+
         // observe
         observe()
 
@@ -67,6 +78,13 @@ class SleepTrackerFragment : Fragment() {
                 viewModel.onSnackBarEventDone()
             }
         })
+
+        viewModel.allNights.observe(viewLifecycleOwner, Observer { nights ->
+            Log.d(TAG, "observe allNights: ")
+            nights?.let {
+                sleepNightAdapter.data = nights
+            }
+        })
     }
 
     private fun moveToSleepQuality(night: SleepNight) {
@@ -80,5 +98,9 @@ class SleepTrackerFragment : Fragment() {
             getString(R.string.cleared_message),
             Snackbar.LENGTH_SHORT
         ).show()
+    }
+
+    companion object {
+        private const val TAG = "SleepTrackerFragment"
     }
 }

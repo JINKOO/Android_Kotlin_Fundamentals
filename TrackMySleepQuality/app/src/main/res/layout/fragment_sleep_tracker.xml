@@ -38,8 +38,8 @@
             app:layout_constraintStart_toEndOf="@+id/start_button"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ScrollView
-            android:id="@+id/scroll_view"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/margin_large"
@@ -47,17 +47,10 @@
             app:layout_constraintTop_toBottomOf="@+id/start_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/clear_button">
+            app:layout_constraintBottom_toTopOf="@+id/clear_button"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
 
-            <TextView
-                android:id="@+id/night_data_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:text="@{sleepTrackerViewModel.toNightString}"
-                tools:text="How Was your Sleep"/>
-
-        </ScrollView>
+        </androidx.recyclerview.widget.RecyclerView>
 
 
         <Button

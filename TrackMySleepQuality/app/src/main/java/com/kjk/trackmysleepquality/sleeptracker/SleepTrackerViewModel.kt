@@ -17,7 +17,7 @@ class SleepTrackerViewModel(
     private var toNight = MutableLiveData<SleepNight?>()
 
     // room이 background에서 실행 한다. suspend로 실행하지 않아도 된다.
-    private var allNights = dataBase.getAllNights()
+    var allNights = dataBase.getAllNights()
 
     // allnights transformations
     val toNightString = Transformations.map(allNights) { allNights ->
@@ -59,6 +59,7 @@ class SleepTrackerViewModel(
         }
     }
 
+    /** start와 end가 동일하지 않다는 의미는 현재 기록 중인 SleepNight가 있다는 의미이다. */
     private suspend fun getToNightFromDatabase(): SleepNight? {
         val night = dataBase.getToNight()
         if (night?.endTimeMillis != night?.startTimeMillis) {
