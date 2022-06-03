@@ -5,11 +5,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.kjk.trackmysleepquality.R
 import com.kjk.trackmysleepquality.database.SleepDatabase
@@ -55,6 +58,13 @@ class SleepTrackerFragment : Fragment() {
 
         // recyclerView
         binding.recyclerView.apply {
+            //layoutManager = LinearLayoutManager(activity)
+            layoutManager = GridLayoutManager(
+                activity,
+                3,
+                GridLayoutManager.VERTICAL,
+                false
+            )
             adapter = sleepNightAdapter
         }
 
@@ -82,7 +92,8 @@ class SleepTrackerFragment : Fragment() {
         viewModel.allNights.observe(viewLifecycleOwner, Observer { nights ->
             Log.d(TAG, "observe allNights: ")
             nights?.let {
-                sleepNightAdapter.data = nights
+                //sleepNightAdapter.data = nights
+                sleepNightAdapter.submitList(nights)
             }
         })
     }
