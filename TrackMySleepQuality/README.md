@@ -47,6 +47,13 @@ class SleepTrackerViewModel() : ViewModel() {
   
   ...
   
+  // sleepQuality로 이동해야하는 경우이다.
+  // 즉 여기서 navigate를 해야하는 trigger가 발생한다. 사용자가 stop버튼을 클릭하면, 이동한다.
+  fun onStopTracking() {
+    ...
+    _onNavigateToSleepQuality.value = oldNight
+  }
+  
   // 이동완료함을 설정한다.
   fun onNavigateDone() {
     _onNavigateToSleepQuality.value = null
@@ -91,6 +98,15 @@ class SleepQualityViewModel(
   private val _onNavigateToSleepTracker = MutableLiveData<Boolean?>()
   val onNavigateToSleepTracker: LiveData<Boolean>
     get() = _onNavigateToSleepTracker
+  
+  ...
+  
+  // 사용자가 sleepQuality를 선택하면, SleepTrackerFragment로 이동한다.
+  fun onSetSleepQuality() {
+    ...
+    // 사용자가 선택 하면, navigate trigger를 true로
+    _onNavigateToSleepTracker.value = true
+  }
   
   // navigate가 완료됨을 liveData에 알린다.
   fun onNavigateDone() {
