@@ -15,17 +15,6 @@ Architecture
 사용개념
 =======
 
-#.Room
---------
-
-#.Coroutine
-------------
-루틴 루틴 코루틴, 드디어 코루틴이구나 솔직히 처음 다뤄봐서 아직도 이해가 잘 안가지만, 그래도 정리는 해봄.
-앞으로 3번은 더 볼거임!!!
-
-#.`RecyclerView`
------------------
-
 #. `LiveData`를 사용한 Button State Control 
 -----------------
 - click handler안에서 `LiveData`를 사용해, fragment에서 다른 destination(fragment)으로 navigate하도록 설정할 수 있다.
@@ -136,4 +125,35 @@ override fun onCreateView(inflater: LayoutInflater,
 }
 ```
 
+
+- `Transformation`을 사용한, Button visibility설정하기  
+start, stop, clear `Button`들은, 경우에 따라, enable속성이 다르다.
+
+```kotlin
+// startButton은 현재 기록 중인 night가 없어야 enable하다.
+val startButtonEnable = Transformations.map(toNight) { night ->
+  night == null
+}
+
+// endButton은 현재 기록중인 night가 있어야 enable하다.
+val endButtonEnable = Transformations.map(toNight) { night ->
+  night != null
+}
+
+// clearButton은 night list가 존재할 때에만, enable하다.
+val clearButtonEnable = Transformations.map(toNight) { allNights ->
+  allNights?.isNotEmpty()
+}
+```
+
+#.Room
+--------
+
+#.Coroutine
+------------
+루틴 루틴 코루틴, 드디어 코루틴이구나 솔직히 처음 다뤄봐서 아직도 이해가 잘 안가지만, 그래도 정리는 해봄.
+앞으로 3번은 더 볼거임!!!
+
+#.`RecyclerView`
+-----------------
 
