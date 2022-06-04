@@ -20,7 +20,13 @@ Activity는 다음과 같은 상태를 가지며, 각 상태 변화에 따른 li
 - `onResume()` : 화면이 사용자에게 보여지고, 현재 화면에 focus를 주고, 사용자와 상호작용을 할 수 있게 한다. Resume상태에서 focus를 잃으면, onPause()가 호출 된다.
 - `onPasue()` : Resume상태에서, focus를 잃었을 때, 호출된다. 
 - `onStop()` : focus를 잃고, 현재 화면에 Activity가 완전히 가려졌을 때, 호출된다. background로 이동할 때 호출된다. 이때, `Activity` instance는 아직 메모리에 존재한다.
-- `onDestroy()`: 사용자가 시스템 백버튼을 tab했을 때, 발생 한다. 이후, `Activity` instance는 GC에 의해 소멸된다.
+- `onDestroy()`: 2가지 경우가 존재 한다.
+  - RunTime때 장치 구성 변경 으로(화면 회전 등) 시스템에 의해 `onDestroy()`가 호출되는 경우
+    - onDestroy()호출 후, 시스템이 곧 바로 새로운 Activity instance로 `onCreate()`가 호출된다.
+    - `isFinishing()`값이 false
+  - 사용자가 `Activity`를 완전히 닫거나, `Activity`에서 `finish()`가 호출되는 경우
+    - Activity 종료
+    - `isFinishing()`값은 true
 - `onRestart()` : `onStop()`이 호출되어, 다시 Activity가 수행 될때 호출(예를 들면, background에 있다가 foreground로 올라올 때)
 
 #. 시나리오
