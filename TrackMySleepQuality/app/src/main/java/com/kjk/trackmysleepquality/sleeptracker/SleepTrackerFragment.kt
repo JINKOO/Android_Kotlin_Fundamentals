@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -30,7 +31,13 @@ class SleepTrackerFragment : Fragment() {
 
     //
     private val sleepNightAdapter by lazy {
-        SleepNightAdapter()
+        SleepNightAdapter(SleepNightClickListener {
+            Toast.makeText(
+                activity,
+                "id :: ${it}",
+                Toast.LENGTH_SHORT
+            ).show()
+        })
     }
 
     override fun onCreateView(

@@ -33,7 +33,9 @@ class SleepNightDiffCallBack : DiffUtil.ItemCallback<SleepNight>() {
     }
 }
 
-class SleepNightAdapter : ListAdapter<SleepNight, SleepNightAdapter.SleepNightViewHolder>(SleepNightDiffCallBack()) /* RecyclerView.Adapter<SleepNightAdapter.SleepNightViewHolder>()*/ {
+class SleepNightAdapter(
+    private val clickListener: SleepNightClickListener
+) : ListAdapter<SleepNight, SleepNightAdapter.SleepNightViewHolder>(SleepNightDiffCallBack()) /* RecyclerView.Adapter<SleepNightAdapter.SleepNightViewHolder>()*/ {
 
     /* DiffUtil을 사용하므로 필요없다.
     var data = listOf<SleepNight>()
@@ -50,7 +52,10 @@ class SleepNightAdapter : ListAdapter<SleepNight, SleepNightAdapter.SleepNightVi
             parent,
             false
         )
-        return SleepNightViewHolder(binding)
+        return SleepNightViewHolder(
+            binding,
+            clickListener
+        )
     }
 
     override fun onBindViewHolder(holder: SleepNightViewHolder, position: Int) {
@@ -71,7 +76,8 @@ class SleepNightAdapter : ListAdapter<SleepNight, SleepNightAdapter.SleepNightVi
 
     // ViewHolder Class
     class SleepNightViewHolder(
-        private val binding: ItemListSleepNightBinding
+        private val binding: ItemListSleepNightBinding,
+        private val clickListener: SleepNightClickListener
     ) : RecyclerView.ViewHolder(binding.root) {
 
         /** Binding Adapter를 사용하므로, 직접 view의 객체를 가져와 set하지 않는다.*/
@@ -82,6 +88,9 @@ class SleepNightAdapter : ListAdapter<SleepNight, SleepNightAdapter.SleepNightVi
 
             /** binding adapter 사용한다. */
             binding.sleepNight = sleepNight
+
+            /** click Listener set*/
+            binding.sleepNightClickListener = clickListener
         }
 
         /*
@@ -117,4 +126,9 @@ class SleepNightAdapter : ListAdapter<SleepNight, SleepNightAdapter.SleepNightVi
         }
          */
     }
+}
+
+/** Click Listener */
+class SleepNightClickListener(val clickListener: (sleepNightKey: Long) -> Unit) {
+    fun onClick(sleepNight: SleepNight) = clickListener(sleepNight.nightId)
 }
