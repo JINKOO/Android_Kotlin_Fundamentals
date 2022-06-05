@@ -15,8 +15,23 @@ DessertClicker - Starter Code
 Activity는 다음과 같은 상태를 가지며, 각 상태 변화에 따른 lifecycle 관련 call back 메소드를 가지고 있다.
 <img width="420" alt="image" src="https://user-images.githubusercontent.com/37657541/169070325-5b80b0c7-106a-426a-a25d-bb3c88206991.png">
 
-- `onCreate()` : lifecycle동안 오직 한 번만 호출된다. `setContentView(lauout)`을 통해 layout초기화, data binding초기화, View의 초기화, 클릭 리스너 초기화 작업 등을 한다.
-- `onStart()` : 화면이 사용자에게 보여진다. lifecycle 동안 여러번 호출 될 수 있다. background에서 foreground로 올라올때 호출된다. `onStop()`과 쌍을 이룬다.
+- `onCreate()`  
+  - System이 `Activity`를 생성할 때 호출. 생성 후 'Created'상태가 된다.
+  - lifecycle동안 오직 한 번만 호출된다. 따라서, Activity의 수명 주기 동안 한번만 실행되어야하는 시작 로직을 실행한다.  
+    - `setContentView(lauout)`을 통해 layout초기화
+    - `ViewModel` instance 초기화
+    - data binding초기화
+    - View의 초기화
+    - 클릭 리스너 초기화 작업
+    - 기타 Class 범위의 변수 초기화
+- `onStart()`
+  - `onCreate()`호출 후, `Activity`가 'Started'상태가 되면, 호출 되는 call back 메소드.
+  - `Activity`가 화면을 통해 사용자에게 보여진다. 
+  - App은 `Activity`를 forground로 보내 사용자와 상호 작용을 할 수 있도록 '준비' 한다.
+  - lifecycle 동안 여러번 호출 될 수 있다. 
+  - background에서 foreground로 올라 올때 호출된다. 
+  - `onStop()`과 쌍을 이룬다.
+  - `onStart()`는 매우 빠르게 실행 되고, 이후에는 다음 `Resume`상태가 되어, `onResume`을 호출 한다.
 - `onResume()` : 화면이 사용자에게 보여지고, 현재 화면에 focus를 주고, 사용자와 상호작용을 할 수 있게 한다. Resume상태에서 focus를 잃으면, onPause()가 호출 된다.
 - `onPasue()` : Resume상태에서, focus를 잃었을 때, 호출된다. 
 - `onStop()` : focus를 잃고, 현재 화면에 Activity가 완전히 가려졌을 때, 호출된다. background로 이동할 때 호출된다. 이때, `Activity` instance는 아직 메모리에 존재한다.
