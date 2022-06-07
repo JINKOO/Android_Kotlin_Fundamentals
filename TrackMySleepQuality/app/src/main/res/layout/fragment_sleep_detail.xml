@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/sleep_quality_image"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/sleep_quality_textview"
+            tools:src="@drawable/ic_sleep_0"/>
+
+        <TextView
+            android:id="@id/sleep_quality_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sleep_quality_image"
+            app:layout_constraintBottom_toTopOf="@+id/sleep_duration_textview"
+            tools:text="Excellent!!"/>
+
+        <TextView
+            android:id="@+id/sleep_duration_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sleep_quality_textview"
+            app:layout_constraintBottom_toTopOf="@+id/clear_button"
+            tools:text="1 seconds on Monday"/>
+
+        <Button
+            android:id="@+id/clear_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/sleep_duration_textview"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="@string/clear"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

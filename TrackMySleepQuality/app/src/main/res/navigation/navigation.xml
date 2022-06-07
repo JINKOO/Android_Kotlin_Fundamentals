@@ -26,5 +26,13 @@
             app:destination="@id/sleepTrackerFragment"
             app:popUpTo="@id/sleepTrackerFragment"
             app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_sleepQualityFragment_to_sleepDetailFragment"
+            app:destination="@id/sleepDetailFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/sleepDetailFragment"
+        android:name="com.kjk.trackmysleepquality.sleepdetail.SleepDetailFragment"
+        android:label="SleepDetailFragment"
+        tools:layout="@layout/fragment_sleep_detail"/>
 </navigation>
