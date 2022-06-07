@@ -45,6 +45,7 @@
 - 우선 여기서는 하나의 fragment에 하나의 viewModel이 연관되도록 한다.
 - `viewModel`은 UI Controller와 연관이 있어야 한다.
 - 연관된 UI Controller가 fragment 인 경우에는 fragment가 detach될 때, Activity인 경우에는 finish될 때, viewModel의 `onClear()`가 호출된다.
+  - `Activity`인 경우, 사용자가 back button을 tab하면, 1. `ViewModel`의 `onClear()` -> 2. `Activity`의 `onDestroy()` 호출 
 - runtime때 장치의 구성이 변경 되면(화면 회전 등) UI controller는 다시 재생성 된다. 하지만, `ViewModel` 객체는 살아있다.(ViewModelProvider를 사용하기 때문)
 - viewModel 객체를 instance화 할 때에는 `ViewModelPrivider`를 사용한다. 그냥 `ViewModel`을 통해 생성하면, UI Controller와 마찬가지로 runtime 장치 구성이 변경될 때  
 재생성 된다.
