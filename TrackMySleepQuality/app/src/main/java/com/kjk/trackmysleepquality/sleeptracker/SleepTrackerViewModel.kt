@@ -49,6 +49,11 @@ class SleepTrackerViewModel(
     val onSnackBarEvent: LiveData<Boolean>
         get() = _onSnackBarEvent
 
+    /** SleepDetailFragment로 이동하는 event Trigger */
+    private val _onNavigateToSleepDetail = MutableLiveData<Long?>()
+    val onNavigateToSleepDetail: LiveData<Long?>
+        get() = _onNavigateToSleepDetail
+
     init {
         initToNight()
     }
@@ -119,6 +124,14 @@ class SleepTrackerViewModel(
 
     fun onSnackBarEventDone() {
         _onSnackBarEvent.value = false
+    }
+
+    fun onNavigateToSleepDetail(sleepNightId: Long) {
+        _onNavigateToSleepDetail.value = sleepNightId
+    }
+
+    fun onNavigateDoneToSleepDetail() {
+        _onNavigateToSleepDetail.value = null
     }
 
     companion object {

@@ -31,12 +31,15 @@ class SleepTrackerFragment : Fragment() {
 
     //
     private val sleepNightAdapter by lazy {
-        SleepNightAdapter(SleepNightClickListener {
+        SleepNightAdapter(SleepNightClickListener { sleepNightId ->
             Toast.makeText(
                 activity,
-                "id :: ${it}",
+                "id :: ${sleepNightId}",
                 Toast.LENGTH_SHORT
             ).show()
+
+            // moveToDetailFragment
+            viewModel.onNavigateToSleepDetail(sleepNightId)
         })
     }
 
@@ -103,11 +106,24 @@ class SleepTrackerFragment : Fragment() {
                 sleepNightAdapter.submitList(nights)
             }
         })
+
+        viewModel.onNavigateToSleepDetail.observe(viewLifecycleOwner, Observer { sleepNightId ->
+            sleepNightId?.let {
+                // moveToSleepDetailFragment
+                moveToSleepDetailFragment(sleepNightId)
+                viewModel.onNavigateDoneToSleepDetail()
+            }
+        })
     }
 
     private fun moveToSleepQuality(night: SleepNight) {
         this.findNavController()
             .navigate(SleepTrackerFragmentDirections.actionSleepTrackerFragmentToSleepQualityFragment(night.nightId))
+    }
+
+    private fun moveToSleepDetailFragment(sleepNightId: Long) {
+        this.findNavController()
+            .navigate(SleepTrackerFragmentDirections.actionSleepTrackerFragmentToSleepDetailFragment(sleepNightId))
     }
 
     private fun showSnackBarMessage() {

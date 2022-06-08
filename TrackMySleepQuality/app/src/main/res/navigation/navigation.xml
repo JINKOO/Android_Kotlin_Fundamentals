@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_sleepTrackerFragment_to_sleepQualityFragment"
             app:destination="@id/sleepQualityFragment" />
+        <action
+            android:id="@+id/action_sleepTrackerFragment_to_sleepDetailFragment"
+            app:destination="@id/sleepDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/sleepQualityFragment"
@@ -24,15 +27,21 @@
         <action
             android:id="@+id/action_sleepQualityFragment_to_sleepTrackerFragment"
             app:destination="@id/sleepTrackerFragment"
-            app:popUpTo="@id/sleepTrackerFragment"
-            app:popUpToInclusive="true"/>
-        <action
-            android:id="@+id/action_sleepQualityFragment_to_sleepDetailFragment"
-            app:destination="@id/sleepDetailFragment" />
+            app:popUpTo="@id/sleepTrackerFragment" />
     </fragment>
     <fragment
         android:id="@+id/sleepDetailFragment"
         android:name="com.kjk.trackmysleepquality.sleepdetail.SleepDetailFragment"
         android:label="SleepDetailFragment"
-        tools:layout="@layout/fragment_sleep_detail"/>
+        tools:layout="@layout/fragment_sleep_detail">
+        <argument
+            android:name="sleepNightKey"
+            app:argType="long"
+            />
+        <action
+            android:id="@+id/action_sleepDetailFragment_to_sleepTrackerFragment"
+            app:destination="@id/sleepTrackerFragment"
+            app:popUpTo="@id/sleepTrackerFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
 </navigation>
