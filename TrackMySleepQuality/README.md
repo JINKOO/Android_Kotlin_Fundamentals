@@ -157,3 +157,7 @@ val clearButtonEnable = Transformations.map(toNight) { allNights ->
 #.`RecyclerView`
 -----------------
 
+#. `RecyclerView` item Click Listener
+--------------------------------------
+
+
