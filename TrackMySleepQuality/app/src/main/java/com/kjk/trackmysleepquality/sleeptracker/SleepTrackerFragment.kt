@@ -68,13 +68,21 @@ class SleepTrackerFragment : Fragment() {
 
         // recyclerView
         binding.recyclerView.apply {
-            //layoutManager = LinearLayoutManager(activity)
             layoutManager = GridLayoutManager(
                 activity,
                 3,
                 GridLayoutManager.VERTICAL,
                 false
-            )
+            ).also {
+                it.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                    override fun getSpanSize(position: Int): Int {
+                        return when(position) {
+                            0 -> 3
+                            else -> 1
+                        }
+                    }
+                }
+            }
             adapter = sleepNightAdapter
         }
 
@@ -103,7 +111,8 @@ class SleepTrackerFragment : Fragment() {
             Log.d(TAG, "observe allNights: ")
             nights?.let {
                 //sleepNightAdapter.data = nights
-                sleepNightAdapter.submitList(nights)
+                //sleepNightAdapter.submitList(nights)
+                sleepNightAdapter.addHeaderAndSubmitList(it)
             }
         })
 
