@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable-v24/ic_broken_image.xml" value="0.203" />
+        <entry key="app/src/main/res/drawable-v24/loading_img.xml" value="0.203" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.22418478260869565" />
         <entry key="app/src/main/res/layout/fragment_overview.xml" value="0.20592705167173253" />
         <entry key="app/src/main/res/layout/list_item_mars_estate.xml" value="0.20592705167173253" />
