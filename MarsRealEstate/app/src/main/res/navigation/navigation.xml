@@ -9,6 +9,15 @@
         android:id="@+id/overViewFragment"
         android:name="com.kjk.marsrealestate.overview.OverviewFragment"
         android:label="OverViewFragment"
-        tools:layout="@layout/fragment_overview"/>
+        tools:layout="@layout/fragment_overview">
+        <action
+            android:id="@+id/action_overViewFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.kjk.marsrealestate.detail.DetailFragment"
+        android:label="DetailFragment"
+        tools:layout="@layout/fragment_detail" />
 
 </navigation>
