@@ -18,6 +18,12 @@
         android:id="@+id/detailFragment"
         android:name="com.kjk.marsrealestate.detail.DetailFragment"
         android:label="DetailFragment"
-        tools:layout="@layout/fragment_detail" />
+        tools:layout="@layout/fragment_detail" >
+
+        <argument
+            android:name="marsProperty"
+            app:argType="com.kjk.marsrealestate.network.MarsProperty" />
+
+    </fragment>
 
 </navigation>

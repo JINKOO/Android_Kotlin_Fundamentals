@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">MarsRealEstate</string>
+    <string name="menu_show_all">Show All</string>
+    <string name="menu_rent">Rent</string>
+    <string name="menu_buy">Buy</string>
+
+    <string name="display_type">For %s</string>
+    <string name="type_rent">Rent</string>
+    <string name="type_sale">Sale</string>
+    <string name="display_monthly_price">$%, .0f/month</string>
+    <string name="display_price">$%, .0f</string>
 </resources>

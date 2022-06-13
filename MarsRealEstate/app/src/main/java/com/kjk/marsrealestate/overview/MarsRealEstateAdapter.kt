@@ -2,31 +2,22 @@ package com.kjk.marsrealestate.overview
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kjk.marsrealestate.databinding.ListItemMarsEstateBinding
 import com.kjk.marsrealestate.network.MarsProperty
 
-class MarsRealEstateAdapter :
-    RecyclerView.Adapter<MarsRealEstateAdapter.MarsRealEstateViewHolder>() {
-
-    var properties = listOf<MarsProperty>()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
+class MarsRealEstateAdapter(
+    private val clickListener: OnClickListener
+) : ListAdapter<MarsProperty, MarsRealEstateAdapter.MarsRealEstateViewHolder>(MarsPropertyDiffUtilCallBack()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MarsRealEstateViewHolder {
         return MarsRealEstateViewHolder.from(parent)
     }
 
     override fun onBindViewHolder(holder: MarsRealEstateViewHolder, position: Int) {
-        holder.bind(properties[position])
-    }
-
-    override fun getItemCount() = properties.size
-
-    fun updateProperties(properties: List<MarsProperty>) {
-        this.properties = properties
+        holder.bind(getItem(position), clickListener)
     }
 
     // ViewHolder Class
@@ -34,8 +25,9 @@ class MarsRealEstateAdapter :
         private val binding: ListItemMarsEstateBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(property: MarsProperty) {
+        fun bind(property: MarsProperty, clickListener: OnClickListener) {
             binding.marsProperty = property
+            binding.clickListener = clickListener
             binding.executePendingBindings()
         }
 
@@ -51,4 +43,20 @@ class MarsRealEstateAdapter :
             }
         }
     }
+}
+
+/** DiffUtil */
+class MarsPropertyDiffUtilCallBack : DiffUtil.ItemCallback<MarsProperty>() {
+    override fun areItemsTheSame(oldItem: MarsProperty, newItem: MarsProperty): Boolean {
+        return oldItem === newItem
+    }
+
+    override fun areContentsTheSame(oldItem: MarsProperty, newItem: MarsProperty): Boolean {
+        return oldItem.id == newItem.id
+    }
+}
+
+/** click Listener */
+class OnClickListener(private val clickListener: (marsProperty : MarsProperty) -> Unit) {
+    fun onClickListener(marsProperty: MarsProperty) = clickListener(marsProperty)
 }

@@ -4,25 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <!-- View의 속성을 Binding Experssion에서 사용하기 위해-->
+        <import type="android.view.View" />
+
         <variable
             name="marsProperty"
             type="com.kjk.marsrealestate.network.MarsProperty" />
+
+        <variable
+            name="clickListener"
+            type="com.kjk.marsrealestate.overview.OnClickListener" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="170dp">
+        android:layout_height="170dp"
+        android:onClick="@{() -> clickListener.onClickListener(marsProperty)}">
 
-        <ImageView
-            android:id="@+id/mars_imageview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ic_broken_image"
-            app:imageSrc="@{marsProperty.imgSrcUrl}"/>
+            <ImageView
+                android:id="@+id/mars_imageview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:padding="@dimen/padding_small"
+                android:scaleType="centerCrop"
+                app:imageSrc="@{marsProperty.imgSrcUrl}"
+                tools:src="@drawable/ic_broken_image" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:id="@+id/dollar_imageview"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_gravity="bottom|end"
+                android:adjustViewBounds="true"
+                android:padding="@dimen/padding_small"
+                tools:src="@drawable/ic_for_sale_outline"
+                android:src="@drawable/ic_for_sale_outline"
+                android:visibility="@{marsProperty.rental ? View.GONE : View.VISIBLE}"/>
+
+    </FrameLayout>
 </layout>

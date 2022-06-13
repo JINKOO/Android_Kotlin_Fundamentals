@@ -15,20 +15,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/title_textview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/padding_small"
-            android:text="@{viewModel.response}"
-            android:textAlignment="center"
-            android:textSize="23sp"
-            app:layout_constraintBottom_toTopOf="@id/mars_recyclerview"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="RESPONSE FROM SERVER" />
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/mars_recyclerview"
             android:layout_width="0dp"
@@ -37,10 +23,22 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title_textview"
-            tools:layout="@layout/list_item_mars_estate">
-
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout="@layout/list_item_mars_estate"
+            app:recyclerViewData="@{viewModel.properties}">
         </androidx.recyclerview.widget.RecyclerView>
+
+        <ImageView
+            android:id="@+id/status_imageview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/ic_broken_image"
+            app:marsApiStatus="@{viewModel.status}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
