@@ -43,10 +43,16 @@ class VideoAdapter : ListAdapter<DevByteVideo, VideoAdapter.VideoViewHolder>(Vid
 }
 
 class VideoDiffUtilCallBack : DiffUtil.ItemCallback<DevByteVideo>() {
+    /**
+     * 동일한 객체인지 판별한다.
+     * 여기서는 url이 PK이다.
+     * */
     override fun areItemsTheSame(oldItem: DevByteVideo, newItem: DevByteVideo): Boolean {
-        return oldItem === newItem
+        return oldItem.url == newItem.url
     }
 
+    /** areItemsTheSame()에서 true를 반환할 때에만, 이 함수가 실행된다.
+     * 객체가 같을 때에만, content도 비교한다.*/
     override fun areContentsTheSame(oldItem: DevByteVideo, newItem: DevByteVideo): Boolean {
         return oldItem == newItem
     }

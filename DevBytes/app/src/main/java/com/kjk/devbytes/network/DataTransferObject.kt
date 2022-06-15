@@ -1,5 +1,6 @@
 package com.kjk.devbytes.network
 
+import com.kjk.devbytes.database.VideoDatabaseEntity
 import com.kjk.devbytes.domain.DevByteVideo
 import com.squareup.moshi.JsonClass
 
@@ -11,7 +12,9 @@ data class NetworkVideoContainer(
     val videos: List<NetworkVideo>
 )
 
-/** Network로 부터 받아온 network entity*/
+/**
+ * Network object
+ * Network로 부터 받아온 network entity*/
 data class NetworkVideo(
     val title: String,
     val description: String,
@@ -34,5 +37,15 @@ fun NetworkVideoContainer.asDomainModel(): List<DevByteVideo> {
     }
 }
 
-
 /** 추후에 network entity를 database entity로 변경해야 한다.*/
+fun NetworkVideoContainer.asDatabaseModel(): List<VideoDatabaseEntity> {
+    return videos.map {
+        VideoDatabaseEntity(
+            url = it.url,
+            updated = it.updated,
+            title = it.title,
+            description = it.description,
+            thumbnail = it.thumbnail
+        )
+    }
+}
