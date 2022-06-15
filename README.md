@@ -13,3 +13,4 @@
   5. ### [DessertClicker](https://github.com/JINKOO/Android_Kotlin_Fundamentals/tree/main/DessertClicker-Starter)
   6. ### [GuessTheWord](https://github.com/JINKOO/Android_Kotlin_Fundamentals/tree/main/GuessTheWord)
   7. ### [SleepMyTracker](https://github.com/JINKOO/Android_Kotlin_Fundamentals/tree/main/TrackMySleepQuality)
+  8. ### [DevByteVideo](https://github.com/JINKOO/Android_Kotlin_Fundamentals/tree/main/DevBytes)
