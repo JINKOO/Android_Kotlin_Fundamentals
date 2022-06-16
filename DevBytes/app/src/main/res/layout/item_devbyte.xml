@@ -5,7 +5,11 @@
 
     <data>
         <variable
-            name="devbytevideo"
+            name="callBack"
+            type="com.kjk.devbytes.ui.VideoClickListener" />
+
+        <variable
+            name="devByteVideo"
             type="com.kjk.devbytes.domain.DevByteVideo" />
     </data>
 
@@ -48,7 +52,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@tools:sample/backgrounds/scenic"
-                app:imgSrc="@{devbytevideo.thumbnail}"/>
+                app:imgSrc="@{devByteVideo.thumbnail}"/>
 
             <ImageView
                 android:id="@+id/play_icon"
@@ -69,7 +73,7 @@
                 android:textAllCaps="false"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                android:text="@{devbytevideo.title}"
+                android:text="@{devByteVideo.title}"
                 app:layout_constraintEnd_toStartOf="@+id/right_well"
                 app:layout_constraintStart_toEndOf="@+id/play_icon"
                 app:layout_constraintTop_toBottomOf="@+id/video_thumbnail"
@@ -85,7 +89,7 @@
                 android:textAllCaps="false"
                 android:textColor="@color/black"
                 android:textSize="14sp"
-                android:text="@{devbytevideo.description}"
+                android:text="@{devByteVideo.description}"
                 app:layout_constraintEnd_toEndOf="@+id/right_well"
                 app:layout_constraintStart_toStartOf="@+id/left_well"
                 app:layout_constraintTop_toBottomOf="@+id/title"
@@ -102,7 +106,8 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="0.0"
+                android:onClick="@{() -> callBack.clickListener(devByteVideo)}"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>

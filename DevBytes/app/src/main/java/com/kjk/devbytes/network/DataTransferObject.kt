@@ -15,6 +15,7 @@ data class NetworkVideoContainer(
 /**
  * Network object
  * Network로 부터 받아온 network entity*/
+@JsonClass(generateAdapter = true)
 data class NetworkVideo(
     val title: String,
     val description: String,

@@ -12,14 +12,15 @@ import com.kjk.devbytes.R
 import com.kjk.devbytes.domain.DevByteVideo
 import com.kjk.devbytes.viewModel.VideoApiStatus
 
-/** RecyclerView Item에 image set */
+/**
+ * RecyclerView Item에 image set
+ */
 @BindingAdapter("imgSrc")
 fun setThumbnailImage(imageView: ImageView, imgSrcUrl: String?) {
     imgSrcUrl?.let {
 
         val imgSrc = imgSrcUrl.toUri().buildUpon().scheme("https").build()
 
-        // Glide 라이브러리를 사용해서 이미지를 set해야함!!!!!!!!
         Glide.with(imageView.context)
             .load(imgSrc)
             .apply(
@@ -31,14 +32,15 @@ fun setThumbnailImage(imageView: ImageView, imgSrcUrl: String?) {
     }
 }
 
-/** RecyclerView Item에 Progressbar set */
+/**
+ * RecyclerView Item에 Progressbar set
+ */
 @BindingAdapter("apiStatus", "videoList")
 fun hideProgressBar(
     progressBar: ProgressBar,
     apiStatus: VideoApiStatus?,
     videoList: List<DevByteVideo>?
 ) {
-
     // progresssbar를 set해야한다.
     if (videoList == null) {
         progressBar.visibility = View.GONE
@@ -52,7 +54,6 @@ fun hideProgressBar(
                     progressBar.visibility = View.VISIBLE
                 }
                 VideoApiStatus.ERROR-> {
-                    Log.d("DevByte", "hideProgressBar: ")
                     progressBar.visibility = View.GONE
                 }
             }
@@ -60,7 +61,10 @@ fun hideProgressBar(
     }
 }
 
-/** connection error */
+/**
+ * network오류시
+ * 보여주는 이미지
+ */
 @BindingAdapter("errorImage")
 fun setErrorImage(imageView: ImageView, apiStatus: VideoApiStatus?) {
     apiStatus?.let {

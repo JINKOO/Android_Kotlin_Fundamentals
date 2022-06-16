@@ -18,7 +18,9 @@ class VideoRepository(
     private val database: VideoDatabase
 ) {
 
-    /** Transformation을 사용해, database로 부터 fetch한 data를 domain object로 변경한다.*/
+    /**
+     * Transformation을 사용해, database로 부터 fetch한 data를 domain object로 변경한다.
+     */
     val videos: LiveData<List<DevByteVideo>> = Transformations.map(database.videoDatabaseDao.getAllVideos()) {
         it.asDomainModel()
     }
