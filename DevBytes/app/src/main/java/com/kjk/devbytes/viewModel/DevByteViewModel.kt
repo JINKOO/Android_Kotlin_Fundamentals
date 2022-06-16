@@ -113,6 +113,7 @@ class DevByteViewModel(
             try {
                 // database refresh
                 videoRepository.refreshVideos()
+                _response.value = "Success!!"
                 _apiStatus.value = VideoApiStatus.DONE
             } catch (e: Exception) {
                 _response.value = "Failure :: ${e.message}"

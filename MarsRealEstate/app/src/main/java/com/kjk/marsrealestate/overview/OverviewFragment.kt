@@ -10,19 +10,19 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.kjk.marsrealestate.R
 import com.kjk.marsrealestate.databinding.FragmentOverviewBinding
-import com.kjk.marsrealestate.network.MarsProperty
+import com.kjk.marsrealestate.domain.MarsProperty
 
 class OverviewFragment : Fragment() {
 
     private lateinit var binding: FragmentOverviewBinding
 
     private val viewModel: OverviewViewModel by lazy {
-        ViewModelProvider(this).get(OverviewViewModel::class.java)
+        val activity = requireNotNull(activity).application
+        ViewModelProvider(this, OverviewViewModelFactory(activity)).get(OverviewViewModel::class.java)
     }
 
     private val marsAdapter: MarsRealEstateAdapter by lazy {
         MarsRealEstateAdapter(OnClickListener {
-            // detailFragment로 이동
             viewModel.moveToDetail((it))
         })
     }
@@ -57,7 +57,6 @@ class OverviewFragment : Fragment() {
             layoutManager = GridLayoutManager(activity, MAX_SPAN_COUNT)
             adapter = marsAdapter
         }
-
         setHasOptionsMenu(true)
     }
 

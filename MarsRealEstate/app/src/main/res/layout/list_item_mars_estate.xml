@@ -9,17 +9,17 @@
 
         <variable
             name="marsProperty"
-            type="com.kjk.marsrealestate.network.MarsProperty" />
+            type="com.kjk.marsrealestate.domain.MarsProperty" />
 
         <variable
-            name="clickListener"
+            name="callBack"
             type="com.kjk.marsrealestate.overview.OnClickListener" />
     </data>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="170dp"
-        android:onClick="@{() -> clickListener.onClickListener(marsProperty)}">
+        android:onClick="@{() -> callBack.onClickListener(marsProperty)}">
 
             <ImageView
                 android:id="@+id/mars_imageview"

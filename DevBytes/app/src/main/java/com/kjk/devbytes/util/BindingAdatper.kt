@@ -6,10 +6,12 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.kjk.devbytes.R
 import com.kjk.devbytes.domain.DevByteVideo
+import com.kjk.devbytes.ui.VideoAdapter
 import com.kjk.devbytes.viewModel.VideoApiStatus
 
 /**
@@ -18,9 +20,7 @@ import com.kjk.devbytes.viewModel.VideoApiStatus
 @BindingAdapter("imgSrc")
 fun setThumbnailImage(imageView: ImageView, imgSrcUrl: String?) {
     imgSrcUrl?.let {
-
         val imgSrc = imgSrcUrl.toUri().buildUpon().scheme("https").build()
-
         Glide.with(imageView.context)
             .load(imgSrc)
             .apply(
@@ -62,8 +62,7 @@ fun hideProgressBar(
 }
 
 /**
- * network오류시
- * 보여주는 이미지
+ * network오류시 보여주는 이미지
  */
 @BindingAdapter("errorImage")
 fun setErrorImage(imageView: ImageView, apiStatus: VideoApiStatus?) {
@@ -77,5 +76,17 @@ fun setErrorImage(imageView: ImageView, apiStatus: VideoApiStatus?) {
                 imageView.visibility = View.GONE
             }
         }
+    }
+}
+
+/**
+ * recyclerview에 binding adapter를 사용해서
+ * data를 set한다.
+ */
+@BindingAdapter("videoList")
+fun setVideoDataToList(recyclerView: RecyclerView, videos: List<DevByteVideo>?) {
+    val adapter = recyclerView.adapter as VideoAdapter
+    videos?.let {
+        adapter.submitList(videos)
     }
 }

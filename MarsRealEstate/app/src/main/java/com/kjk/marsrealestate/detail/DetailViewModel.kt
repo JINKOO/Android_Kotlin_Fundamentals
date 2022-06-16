@@ -3,7 +3,7 @@ package com.kjk.marsrealestate.detail
 import android.app.Application
 import androidx.lifecycle.*
 import com.kjk.marsrealestate.R
-import com.kjk.marsrealestate.network.MarsProperty
+import com.kjk.marsrealestate.domain.MarsProperty
 
 class DetailViewModel(
     marsProperty: MarsProperty,

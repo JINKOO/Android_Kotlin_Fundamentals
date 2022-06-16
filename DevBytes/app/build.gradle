@@ -43,9 +43,10 @@ dependencies {
     def lifecycle_version = "2.4.1"
     def version_moshi = "1.9.3"
     def version_retrofit = "2.9.0"
-    def version_glide = "4.8.0"
+    def version_glide = "4.13.0"
     def roomVersion = "2.4.2"
     def coroutines = "1.6.1"
+    def timber = "4.7.1"
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.2'
@@ -83,4 +84,6 @@ dependencies {
     // coroutine
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines")
 
+    // logging
+    implementation("com.jakewharton.timber:timber:$timber")
 }

@@ -19,6 +19,7 @@ import com.kjk.devbytes.databinding.FragmentDevByteBinding
 import com.kjk.devbytes.viewModel.DevByteViewModel
 import com.kjk.devbytes.viewModel.DevByteViewModelFactory
 import com.kjk.devbytes.viewModel.VideoApiStatus
+import timber.log.Timber
 
 class DevByteFragment : Fragment() {
 
@@ -28,11 +29,12 @@ class DevByteFragment : Fragment() {
     private lateinit var binding: FragmentDevByteBinding
 
     /**
-     *  ViewModelFactory,
-     *  ViewModel
+     *  ViewModel with ViewModelFactory
      */
-    private lateinit var viewModelFactory: DevByteViewModelFactory
-    private lateinit var viewModel: DevByteViewModel
+    private val viewModel: DevByteViewModel by lazy {
+        val activity = requireNotNull(activity).application
+        ViewModelProvider(this, DevByteViewModelFactory(activity)).get(DevByteViewModel::class.java)
+    }
 
     /**
      * adapter
@@ -42,10 +44,10 @@ class DevByteFragment : Fragment() {
             // move to youtube, if youtube App 이 존재하는 경우
             var intent = Intent(Intent.ACTION_VIEW, video.launchUri)
             try {
-                Log.d(TAG, "callback: ${video.launchUri}")
+                Timber.d("callBack: ${video.launchUri}")
                 startActivity(intent)
             } catch (e : ActivityNotFoundException) {
-                Log.d(TAG, "callback: ${e.message}")
+                Timber.d("callback: ${e.message}")
                 // 만약 해당 intent를 실행할 수 있는 Activity가 없는 경우, 즉 youTube App이 존재하지 않는 경우,
                 intent = Intent(Intent.ACTION_VIEW, Uri.parse(video.url))
                 startActivity(intent)
@@ -67,15 +69,14 @@ class DevByteFragment : Fragment() {
             false
         )
 
-        val application = requireNotNull(activity).application
-        viewModelFactory = DevByteViewModelFactory(application)
-        viewModel = ViewModelProvider(this).get(DevByteViewModel::class.java)
-
         initLayout()
 
-        observe()
-
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        observe()
     }
 
     /**
@@ -84,7 +85,7 @@ class DevByteFragment : Fragment() {
      */
     private fun observe() {
         viewModel.response.observe(viewLifecycleOwner) {
-            Log.d(TAG, "observe: ${it}")
+            Timber.d(it)
         }
 
         viewModel.videos.observe(viewLifecycleOwner) { videos ->
@@ -101,7 +102,6 @@ class DevByteFragment : Fragment() {
             }
         })
     }
-
 
     /**
      * layout 초기화 하는 부분

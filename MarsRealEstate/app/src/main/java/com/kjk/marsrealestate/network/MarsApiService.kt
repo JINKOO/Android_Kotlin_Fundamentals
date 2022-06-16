@@ -1,8 +1,8 @@
 package com.kjk.marsrealestate.network
 
+import com.kjk.marsrealestate.domain.MarsProperty
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
@@ -25,7 +25,7 @@ interface MarsApiService {
     @GET("realestate")
     suspend fun getProperties(
         @Query("filter") type: String //?filter=type
-    ) : List<MarsProperty>
+    ) : List<NetworkMarsProperty>
 }
 
 /** object 키워드를 사용하면, singleton으로 객체가 생긴다.*/

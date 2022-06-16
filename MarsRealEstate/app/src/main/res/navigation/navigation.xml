@@ -22,7 +22,7 @@
 
         <argument
             android:name="marsProperty"
-            app:argType="com.kjk.marsrealestate.network.MarsProperty" />
+            app:argType="com.kjk.marsrealestate.domain.MarsProperty" />
 
     </fragment>
 

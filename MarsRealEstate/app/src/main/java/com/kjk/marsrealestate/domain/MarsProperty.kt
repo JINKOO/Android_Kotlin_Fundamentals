@@ -1,4 +1,4 @@
-package com.kjk.marsrealestate.network
+package com.kjk.marsrealestate.domain
 
 import android.os.Parcelable
 import com.squareup.moshi.Json

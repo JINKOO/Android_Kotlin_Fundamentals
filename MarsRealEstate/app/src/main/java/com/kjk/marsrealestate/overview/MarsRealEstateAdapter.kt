@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kjk.marsrealestate.databinding.ListItemMarsEstateBinding
-import com.kjk.marsrealestate.network.MarsProperty
+import com.kjk.marsrealestate.domain.MarsProperty
 
 class MarsRealEstateAdapter(
     private val clickListener: OnClickListener
@@ -27,7 +27,7 @@ class MarsRealEstateAdapter(
 
         fun bind(property: MarsProperty, clickListener: OnClickListener) {
             binding.marsProperty = property
-            binding.clickListener = clickListener
+            binding.callBack = clickListener
             binding.executePendingBindings()
         }
 

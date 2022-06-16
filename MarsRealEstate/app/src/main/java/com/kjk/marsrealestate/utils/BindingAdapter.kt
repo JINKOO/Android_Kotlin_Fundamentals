@@ -4,12 +4,11 @@ import android.view.View
 import android.widget.ImageView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.kjk.marsrealestate.R
-import com.kjk.marsrealestate.network.MarsProperty
+import com.kjk.marsrealestate.domain.MarsProperty
 
 @BindingAdapter("imageSrc")
 fun setImageSrc(imageView: ImageView, imgSrcUrl: String?) {
