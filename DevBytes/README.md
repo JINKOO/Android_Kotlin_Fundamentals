@@ -18,7 +18,8 @@
   지금까지 진행했던 프로젝트에서는 `Retrofit`을 사용해서 Internet연결을 통해서 remote에서 data를 가져와,
   이 data를 곧바로 `UI Controller`(예를 들면, `Fragment`의 `Recyclerview`)에 바로 출력했다.
   대신에 device의 local storage를 사용해, 좋지 않은 Internet환경 또는 Internet연결이 없어도, 최신의 data를 사용할 수 있게 한다. 
-- 이 기법은 App내 data 접근에 있어 Clean API를 제공한다.
+- 이 기법은 App내 data 접근에 있어 Clean API를 제공한다.  
+  `ViewModel`, `UI Controller` 단에서는 data가 Remote DataSource에서 온 것 인지, Local database로 부터 fetch한 것인지 모른다. --> '관심사 분리'
 
   <img width="866" alt="image" src="https://user-images.githubusercontent.com/37657541/173493349-f8caf6c9-a3ec-4f1b-a501-10c32e301b27.png">
 
