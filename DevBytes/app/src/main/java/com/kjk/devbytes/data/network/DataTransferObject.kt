@@ -1,7 +1,7 @@
-package com.kjk.devbytes.network
+package com.kjk.devbytes.data.network
 
-import com.kjk.devbytes.database.VideoDatabaseEntity
-import com.kjk.devbytes.domain.DevByteVideo
+import com.kjk.devbytes.data.database.VideoDatabaseEntity
+import com.kjk.devbytes.data.domain.DevByteVideo
 import com.squareup.moshi.JsonClass
 
 

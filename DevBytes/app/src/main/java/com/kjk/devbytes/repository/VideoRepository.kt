@@ -2,11 +2,11 @@ package com.kjk.devbytes.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import com.kjk.devbytes.database.VideoDatabase
-import com.kjk.devbytes.database.asDomainModel
-import com.kjk.devbytes.domain.DevByteVideo
-import com.kjk.devbytes.network.VideoApi
-import com.kjk.devbytes.network.asDatabaseModel
+import com.kjk.devbytes.data.database.VideoDatabase
+import com.kjk.devbytes.data.database.asDomainModel
+import com.kjk.devbytes.data.domain.DevByteVideo
+import com.kjk.devbytes.data.network.VideoApi
+import com.kjk.devbytes.data.network.asDatabaseModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

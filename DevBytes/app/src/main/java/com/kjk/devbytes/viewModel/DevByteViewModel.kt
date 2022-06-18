@@ -1,16 +1,12 @@
 package com.kjk.devbytes.viewModel
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.kjk.devbytes.database.VideoDatabase
-import com.kjk.devbytes.domain.DevByteVideo
-import com.kjk.devbytes.network.NetworkVideoContainer
-import com.kjk.devbytes.network.VideoApi
-import com.kjk.devbytes.network.asDomainModel
+import com.kjk.devbytes.data.database.VideoDatabase
+import com.kjk.devbytes.data.domain.DevByteVideo
 import com.kjk.devbytes.repository.VideoRepository
 import kotlinx.coroutines.launch
 import java.lang.Exception
@@ -25,7 +21,6 @@ class DevByteViewModel(
      */
     private val videoRepository =
         VideoRepository(VideoDatabase.getInstance(application))
-
 
     /*
     /**

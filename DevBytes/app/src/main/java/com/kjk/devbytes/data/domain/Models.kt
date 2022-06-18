@@ -1,4 +1,4 @@
-package com.kjk.devbytes.domain
+package com.kjk.devbytes.data.domain
 
 import android.net.Uri
 

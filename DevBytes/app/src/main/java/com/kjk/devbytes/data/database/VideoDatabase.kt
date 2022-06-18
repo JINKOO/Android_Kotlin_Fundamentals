@@ -1,4 +1,4 @@
-package com.kjk.devbytes.database
+package com.kjk.devbytes.data.database
 
 import android.content.Context
 import androidx.room.Database

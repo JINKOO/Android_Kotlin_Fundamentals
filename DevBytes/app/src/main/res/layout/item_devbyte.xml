@@ -10,7 +10,7 @@
 
         <variable
             name="devByteVideo"
-            type="com.kjk.devbytes.domain.DevByteVideo" />
+            type="com.kjk.devbytes.data.domain.DevByteVideo" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

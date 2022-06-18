@@ -1,8 +1,8 @@
-package com.kjk.devbytes.database
+package com.kjk.devbytes.data.database
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.kjk.devbytes.domain.DevByteVideo
+import com.kjk.devbytes.data.domain.DevByteVideo
 
 /** database DTO 이다.*/
 @Entity(tableName = "database_video")

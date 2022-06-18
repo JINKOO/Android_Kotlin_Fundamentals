@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.kjk.devbytes.databinding.ItemDevbyteBinding
-import com.kjk.devbytes.domain.DevByteVideo
+import com.kjk.devbytes.data.domain.DevByteVideo
 
 class VideoAdapter(
     private val callBack: VideoClickListener

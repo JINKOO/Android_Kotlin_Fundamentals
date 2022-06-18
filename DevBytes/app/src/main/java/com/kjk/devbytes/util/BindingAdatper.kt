@@ -1,6 +1,5 @@
 package com.kjk.devbytes.util
 
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
@@ -10,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.kjk.devbytes.R
-import com.kjk.devbytes.domain.DevByteVideo
+import com.kjk.devbytes.data.domain.DevByteVideo
 import com.kjk.devbytes.ui.VideoAdapter
 import com.kjk.devbytes.viewModel.VideoApiStatus
 
