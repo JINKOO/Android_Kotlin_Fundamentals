@@ -13,8 +13,9 @@
 ==========
 #. `Repository Pattern`
 ---------------------------
+- `MVVM Pattern`과 `Repository Pattern`은 별개이다. 
 - app내에서 data source와 나머지 app의 부분과 분리하는 pattern이다.
-- offline cache를 실현하기 위해서 사용한다(보통 `Room`을 사용한다).  
+- 본 프로젝트에서는 metwork API Call 및 offline cache를 실현하기 위해서 사용한다(보통 `Room`을 사용한다).  
   지금까지 진행했던 프로젝트에서는 `Retrofit`을 사용해서 Internet연결을 통해서 remote에서 data를 가져와,
   이 data를 곧바로 `UI Controller`(예를 들면, `Fragment`의 `Recyclerview`)에 바로 출력했다.
   대신에 device의 local storage를 사용해, 좋지 않은 Internet환경 또는 Internet연결이 없어도, 최신의 data를 사용할 수 있게 한다. 
