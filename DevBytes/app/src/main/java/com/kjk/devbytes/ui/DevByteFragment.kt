@@ -115,7 +115,7 @@ class DevByteFragment : Fragment() {
 
 
     /**
-     * NetWork오류 메세지 출력 toast
+     * NetWork 상태 오류 메세지 출력 toast
      */
     private fun showNetworkErrorMessage() {
         Toast.makeText(
